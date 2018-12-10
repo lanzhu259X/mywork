@@ -1,0 +1,3 @@
+# MYWORK PROJECT COMMON
+
+> 基础公共信息
