@@ -1,5 +1,6 @@
 package com.lanzhu.mywork.master.config;
 
+import com.lanzhu.mywork.master.utils.AsyncTaskExecutorUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -23,9 +24,12 @@ public class TaskConfig {
     @Primary
     public TaskExecutor createTaskPool() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
-        taskExecutor.setMaxPoolSize(1000);
-        taskExecutor.setCorePoolSize(200);
-        taskExecutor.setQueueCapacity(10000);
+        taskExecutor.setMaxPoolSize(50);
+        taskExecutor.setCorePoolSize(5);
+        taskExecutor.setQueueCapacity(50000);
+        taskExecutor.setKeepAliveSeconds(60);
+        taskExecutor.initialize();
+        AsyncTaskExecutorUtils.setTaskExecutor(50000, taskExecutor);
         return taskExecutor;
     }
 
