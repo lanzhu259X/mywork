@@ -2,7 +2,7 @@ package com.lanzhu.mywork.master.web;
 
 import com.google.common.collect.Maps;
 import com.lanzhu.mywork.master.error.BizException;
-import com.lanzhu.mywork.master.error.GeneralCode;
+import com.lanzhu.mywork.master.error.ErrorCode;
 import com.lanzhu.mywork.master.models.api.ApiResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -53,16 +53,16 @@ public class ExceptionHandlerAdvice {
     public ApiResponse<?> exception(BizException bizException, HandlerMethod handlerMethod, HttpServletRequest request, HttpServletResponse response) throws IOException {
         log.warn("BizException: {}", this.parseExceptionAsString(bizException));
         response.setStatus(HttpStatus.BAD_REQUEST.value());
-        String message = messageHelper.getMessage(bizException.getGeneralCode());
-        return ApiResponse.getFail(bizException.getGeneralCode(), message, bizException.getData());
+        String message = messageHelper.getMessage(bizException.getErrorCode());
+        return ApiResponse.getFail(bizException.getErrorCode(), message, bizException.getData());
     }
 
     @ExceptionHandler({Error.class, Exception.class, Throwable.class, RuntimeException.class})
     public ApiResponse<?> exception(HttpServletResponse response, Throwable exception, HttpServletRequest request) throws IOException {
         log.error("System error:", exception);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        String message = messageHelper.getMessage(GeneralCode.SYS_ERROR);
-        return ApiResponse.getFail(GeneralCode.SYS_ERROR, message, null);
+        String message = messageHelper.getMessage(ErrorCode.SYS_ERROR);
+        return ApiResponse.getFail(ErrorCode.SYS_ERROR, message, null);
     }
 
     private ApiResponse<?> getValid(BindingResult bindingResult) {
@@ -70,8 +70,8 @@ public class ExceptionHandlerAdvice {
         for (FieldError error : bindingResult.getFieldErrors()) {
             data.put(error.getField(), error.getDefaultMessage());
         }
-        String message = messageHelper.getMessage(GeneralCode.SYS_PARAMS_VALID);
-        return ApiResponse.getFail(GeneralCode.SYS_PARAMS_VALID, message, data);
+        String message = messageHelper.getMessage(ErrorCode.SYS_PARAMS_VALID);
+        return ApiResponse.getFail(ErrorCode.SYS_PARAMS_VALID, message, data);
     }
 
     private String parseExceptionAsString(Exception e) {

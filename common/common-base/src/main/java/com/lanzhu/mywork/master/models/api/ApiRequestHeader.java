@@ -29,19 +29,10 @@ public class ApiRequestHeader extends ToString {
     /** system version */
     private String version;
 
-    /** 授权令牌 登录后设置 */
-    private String token;
+    /** 登录后设置 */
+    private Long userId;
 
     /** 跟踪链 */
     private String trackingChain;
-
-    /** 域名 */
-    private String domain;
-
-    private String userAgent;
-
-    /** 补充参数 */
-    private Map<String, String> headMap;
-
 
 }

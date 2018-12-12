@@ -15,37 +15,37 @@ public class BizException extends RuntimeException {
     private static final long serialVersionUID = -2831665763961609441L;
 
     /** 错误码 */
-    private GeneralCode generalCode;
+    private ErrorCode errorCode;
 
     /** 附带内容 */
     private Object data;
 
     public BizException() {
-        super(GeneralCode.SYS_COMMON.getMessage());
+        super(ErrorCode.SYS_COMMON.getMessage());
         this.data = null;
-        this.generalCode = GeneralCode.SYS_COMMON;
+        this.errorCode = ErrorCode.SYS_COMMON;
     }
 
     public BizException(String message) {
         super(message);
         this.data = message;
-        this.generalCode = GeneralCode.SYS_COMMON;
+        this.errorCode = ErrorCode.SYS_COMMON;
     }
 
-    public BizException(GeneralCode generalCode) {
-        super(generalCode.getCode() + ":" + generalCode.getMessage());
+    public BizException(ErrorCode errorCode) {
+        super(errorCode.getCode() + ":" + errorCode.getMessage());
         this.data = null;
-        this.generalCode = generalCode;
+        this.errorCode = errorCode;
     }
 
-    public BizException(GeneralCode generalCode, Object data) {
-        super(generalCode.getCode() + ":" + generalCode.getMessage());
-        this.generalCode = generalCode;
+    public BizException(ErrorCode errorCode, Object data) {
+        super(errorCode.getCode() + ":" + errorCode.getMessage());
+        this.errorCode = errorCode;
         this.data = data;
     }
 
     @Override
     public String toString() {
-        return String.format("error: %d, message: %s", this.getGeneralCode().getCode(), this.getGeneralCode().getMessage());
+        return String.format("error: %d, message: %s", this.getErrorCode().getCode(), this.getErrorCode().getMessage());
     }
 }

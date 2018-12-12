@@ -5,7 +5,7 @@ import org.apache.logging.log4j.ThreadContext;
 import org.apache.logging.log4j.util.Strings;
 
 /**
- * description:
+ * description: 微服务间的跟踪链
  *
  * @author lanzhu259X
  * @date 2018-09-22
@@ -15,7 +15,7 @@ public final class TrackingUtils {
     /** 对应log4j2.xml中 %X{trackingId} */
     public static final String TRACKING_CHAIN = "tracking-chain";
 
-    /** tracking:type:context (例如: [tracking:job:a083188a-aeed-4e8f-a739-67f282b54629]) */
+    /** tracking:type:context (例如: [tracking:job:a083188aaeed4e8fa73967f282b54629]) */
     public static final String SIMPLE_TEMPLATE = "tracking:%s:%s";
 
     /**
@@ -39,6 +39,10 @@ public final class TrackingUtils {
         ThreadContext.remove(TRACKING_CHAIN);
     }
 
+    /**
+     * 获取当前线程的Tracking-chain
+     * @return
+     */
     public static String getTrackingChain() {
         return StringUtils.isNotBlank(ThreadContext.get(TRACKING_CHAIN)) ? ThreadContext.get(TRACKING_CHAIN)
                 : Strings.EMPTY;

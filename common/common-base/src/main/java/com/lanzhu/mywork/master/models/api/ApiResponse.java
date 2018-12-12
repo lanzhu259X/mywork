@@ -1,10 +1,8 @@
 package com.lanzhu.mywork.master.models.api;
 
 import com.lanzhu.mywork.master.commons.ToString;
-import com.lanzhu.mywork.master.error.GeneralCode;
+import com.lanzhu.mywork.master.error.ErrorCode;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * description:
@@ -24,7 +22,7 @@ public class ApiResponse<T> extends ToString {
     private static final long serialVersionUID = 3859910071736214157L;
 
     /** 成功的 code */
-    private static final String SUCCESS = GeneralCode.SUCCESS.getCode();
+    private static final String SUCCESS = ErrorCode.SUCCESS.getCode();
 
     /** 业务是否正常完成, 默认 SUCCESS */
     private String code = SUCCESS;
@@ -74,7 +72,7 @@ public class ApiResponse<T> extends ToString {
     }
 
     public static <T> ApiResponse<T> getFail() {
-        return new ApiResponse<>(GeneralCode.SYS_COMMON.getCode(), null);
+        return new ApiResponse<>(ErrorCode.SYS_COMMON.getCode(), null);
     }
 
     /**
@@ -84,17 +82,17 @@ public class ApiResponse<T> extends ToString {
      * @return
      */
     public static <T> ApiResponse<T> getFail(T data) {
-        return new ApiResponse<>(GeneralCode.SYS_COMMON.getCode(), null, data);
+        return new ApiResponse<>(ErrorCode.SYS_COMMON.getCode(), null, data);
     }
 
     /**
      * message 不会进行国际化
-     * @param generalCode
+     * @param errorCode
      * @param <T>
      * @return
      */
-    public static <T> ApiResponse<T> getFail(GeneralCode generalCode) {
-        return new ApiResponse<>(generalCode.getCode(), generalCode.getMessage(), null);
+    public static <T> ApiResponse<T> getFail(ErrorCode errorCode) {
+        return new ApiResponse<>(errorCode.getCode(), errorCode.getMessage(), null);
     }
 
     /**
@@ -105,29 +103,29 @@ public class ApiResponse<T> extends ToString {
      * @return
      */
     public static <T> ApiResponse<T> getFail(String message, T data) {
-        return new ApiResponse<>(GeneralCode.SYS_COMMON.getCode(), message, data);
+        return new ApiResponse<>(ErrorCode.SYS_COMMON.getCode(), message, data);
     }
 
     /**
      * 该错误的message不会进行国际化
-     * @param generalCode
+     * @param errorCode
      * @param data
      * @param <T>
      * @return
      */
-    public static <T> ApiResponse<T> getFail(GeneralCode generalCode, T data) {
-        return new ApiResponse<>(generalCode.getCode(), generalCode.getMessage(), data);
+    public static <T> ApiResponse<T> getFail(ErrorCode errorCode, T data) {
+        return new ApiResponse<>(errorCode.getCode(), errorCode.getMessage(), data);
     }
 
     /**
      * 该错误的message不会进行国际化(如需要需要手动国际化)
-     * @param generalCode
+     * @param errorCode
      * @param data
      * @param <T>
      * @return
      */
-    public static <T> ApiResponse<T> getFail(GeneralCode generalCode, String message, T data) {
-        return new ApiResponse<>(generalCode.getCode(), message, data);
+    public static <T> ApiResponse<T> getFail(ErrorCode errorCode, String message, T data) {
+        return new ApiResponse<>(errorCode.getCode(), message, data);
     }
 
 }

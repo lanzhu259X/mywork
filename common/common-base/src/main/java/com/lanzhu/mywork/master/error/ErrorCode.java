@@ -10,13 +10,13 @@ import org.apache.commons.lang3.StringUtils;
  *      1. {微服务端口号后三位]}{从001开始递增[三位]} 例如，微服务Gateway端口号为8001, 则Gateway的错误码：001001, 001002等
  *  </p>
  *  <p>
- *      2. GeneralCode 的name, 每个微服务定义两个字符为前缀，后接具体内容 例如 Gateway微服务，
+ *      2. ErrorCode 的name, 每个微服务定义两个字符为前缀，后接具体内容 例如 Gateway微服务，
  *         定义GW为开头字母, 则Gateway的错误码枚举定义为GW_PARAM_ERROR
  *  </p>
  * @author lanzhu259X
  * @date 2018-09-20
  */
-public enum GeneralCode {
+public enum ErrorCode {
 
     // SYS COMMON 000 SY
     SUCCESS("000000", "正常"),
@@ -30,16 +30,16 @@ public enum GeneralCode {
     /** 描述信息 */
     private String message;
 
-    GeneralCode(String code, String message) {
+    ErrorCode(String code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public static GeneralCode findByCode(String code) {
-        GeneralCode[] generalCodes = GeneralCode.values();
-        for (GeneralCode generalCode : generalCodes) {
-            if (StringUtils.equals(code, generalCode.code)) {
-                return generalCode;
+    public static ErrorCode findByCode(String code) {
+        ErrorCode[] errorCodes = ErrorCode.values();
+        for (ErrorCode errorCode : errorCodes) {
+            if (StringUtils.equals(code, errorCode.code)) {
+                return errorCode;
             }
         }
         return null;

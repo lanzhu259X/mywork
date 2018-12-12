@@ -1,7 +1,7 @@
 package com.lanzhu.mywork.master.web;
 
 import com.lanzhu.mywork.master.constant.Language;
-import com.lanzhu.mywork.master.error.GeneralCode;
+import com.lanzhu.mywork.master.error.ErrorCode;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.MessageSource;
@@ -26,12 +26,12 @@ public class MessageHelper {
     @Resource
     private MessageSource messageSource;
 
-    public String getMessage(GeneralCode generalCode, Object... params) {
-        return getMessage(generalCode, null, params);
+    public String getMessage(ErrorCode errorCode, Object... params) {
+        return getMessage(errorCode, null, params);
     }
 
-    public String getMessage(GeneralCode generalCode, Language language, Object... params) {
-        String key = generalCode.getClass().getName() + "." + generalCode.name();
+    public String getMessage(ErrorCode errorCode, Language language, Object... params) {
+        String key = errorCode.getClass().getName() + "." + errorCode.name();
         return getMessage(key, language, params);
     }
 

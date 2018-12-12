@@ -70,7 +70,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         //设置前缀使用redis缓存
         if (StringUtils.isNotBlank(cachePrefix)) {
             RedisCacheManager redisCacheManager = new RedisCacheManager(redisTemplate);
-            redisCacheManager.setCachePrefix(new DefaultRedisCachePrefix(cachePrefix + ":"));
+            redisCacheManager.setCachePrefix(new DefaultRedisCachePrefix(cachePrefix + "."));
             redisCacheManager.setUsePrefix(true);
             cacheManager = redisCacheManager;
         } else {// 本地内存缓存

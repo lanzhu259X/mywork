@@ -3,6 +3,7 @@ package com.lanzhu.mywork.master.config;
 import com.lanzhu.mywork.master.constant.Constant;
 import com.lanzhu.mywork.master.models.api.ApiRequest;
 import com.lanzhu.mywork.master.utils.TrackingUtils;
+import com.lanzhu.mywork.master.web.WebHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
 /**
- * description:
+ * description: 主要用于微服务之间的调用链
  *
  * @author lanzhu259X
  * @date 2018-09-22
@@ -43,6 +44,9 @@ public class TrackingChainConfig {
             HttpServletRequest request =
                     ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
             envTag = request.getHeader(Constant.ENV_TAG_GRAY);
+            if (StringUtils.isBlank(envTag)) {
+                envTag = WebHelper.getCookieValue(request, Constant.ENV_TAG_GRAY);
+            }
         }catch (Exception e) {
             envTag = StringUtils.EMPTY;
         }

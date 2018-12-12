@@ -3,6 +3,7 @@ package com.lanzhu.mywork.master.config;
 import com.lanzhu.mywork.master.constant.Constant;
 import com.lanzhu.mywork.master.ribbon.IRibbonFilterContext;
 import com.lanzhu.mywork.master.ribbon.RibbonFilterContextHolder;
+import com.lanzhu.mywork.master.web.WebHelper;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.log4j.Log4j2;
@@ -51,9 +52,13 @@ public class FeignConfig implements RequestInterceptor {
             if (StringUtils.isNotBlank(context.getEnvTag())) {
                 template.header(Constant.ENV_TAG_GRAY, context.getEnvTag());
             }else {
-                //若ribbon中无值，则从header中获取并设置
-                if (StringUtils.isNotBlank(request.getHeader(Constant.ENV_TAG_GRAY))) {
-                    context.setEnvTag(request.getHeader(Constant.ENV_TAG_GRAY));
+                //若ribbon中无值，则从header/或者cookie中获取并设置
+                String tagGray = request.getHeader(Constant.ENV_TAG_GRAY);
+                if (StringUtils.isBlank(tagGray)) {
+                    tagGray = WebHelper.getCookieValue(request, Constant.ENV_TAG_GRAY);
+                }
+                if (StringUtils.isNotBlank(tagGray)) {
+                    context.setEnvTag(tagGray);
                 }
             }
             //使用json格式，编码UTF-8

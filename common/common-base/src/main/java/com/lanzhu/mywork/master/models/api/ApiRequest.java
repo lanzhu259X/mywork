@@ -33,13 +33,10 @@ public class ApiRequest<T> extends ApiRequestHeader {
     public static <T> ApiRequest<T> instance(ApiRequestHeader header, T data) {
         ApiRequest<T> request = new ApiRequest<>();
         request.setLanguage(header.getLanguage() == null ? Language.CH_ZH : header.getLanguage());
-        request.setTerminal(header.getTerminal());
-        request.setDomain(header.getDomain());
-        request.setToken(header.getToken());
+        request.setTerminal(header.getTerminal() == null ? Terminal.OTHER : header.getTerminal());
+        request.setUserId(header.getUserId());
         request.setTrackingChain(header.getTrackingChain());
-        request.setUserAgent(header.getUserAgent());
         request.setVersion(header.getVersion());
-        request.setHeadMap(header.getHeadMap());
         request.setData(data);
         return request;
     }
