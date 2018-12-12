@@ -88,30 +88,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- sharing db -->
-        <dependency>
-            <groupId>io.shardingsphere</groupId>
-            <artifactId>sharding-core</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.codehaus.groovy</groupId>
-                    <artifactId>groovy</artifactId>
-                </exclusion>
-            </exclusions>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.shardingsphere</groupId>
-            <artifactId>sharding-jdbc</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.codehaus.groovy</groupId>
-                    <artifactId>groovy</artifactId>
-                </exclusion>
-            </exclusions>
-            <scope>provided</scope>
-        </dependency>
-
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
