@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.lanzhu.mywork</groupId>
-    <artifactId>eureka-server</artifactId>
+    <artifactId>gateway</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -16,39 +16,40 @@
         <relativePath>../common</relativePath>
     </parent>
 
-    <dependencies>
+    <properties>
+        <common-base-version>1.0-SNAPSHOT</common-base-version>
+    </properties>
 
+    <dependencies>
         <dependency>
             <groupId>com.lanzhu.mywork</groupId>
             <artifactId>common-base</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${common-base-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka-server</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
 
-
     </dependencies>
+
 
     <build>
         <plugins>
@@ -58,7 +59,6 @@
             </plugin>
         </plugins>
     </build>
-
 
 
 </project>
