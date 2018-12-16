@@ -11,6 +11,7 @@
     <modules>
         <module>account-api</module>
         <module>account-common</module>
+        <module>account-web</module>
     </modules>
 
     <parent>
@@ -51,17 +52,16 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.lanzhu.mywork</groupId>
+                <artifactId>account-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+
 
 
 </project>
