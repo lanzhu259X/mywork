@@ -1,4 +1,4 @@
-package com.lanzhu.mywork.master.common.config;
+package com.lanzhu.mywork.master.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
