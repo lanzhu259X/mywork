@@ -4,6 +4,7 @@ import com.lanzhu.mywork.master.commons.ToString;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,9 +19,12 @@ import java.util.Date;
 public class UserVo extends ToString {
     private static final long serialVersionUID = 1709630768040872879L;
 
+    @NotNull
     private Long id;
 
     private String name;
+
+    private int status;
 
     private Date createTime;
 

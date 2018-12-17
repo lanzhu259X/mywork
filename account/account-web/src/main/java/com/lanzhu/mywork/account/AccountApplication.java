@@ -3,6 +3,7 @@ package com.lanzhu.mywork.account;
 import com.lanzhu.mywork.master.common.utils.IpUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  */
 @SpringBootApplication
 @EnableFeignClients
+@EnableDiscoveryClient
 public class AccountApplication {
 
     public static void main(String[] args) {

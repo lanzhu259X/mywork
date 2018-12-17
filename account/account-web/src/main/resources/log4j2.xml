@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="OFF">
+    <Properties>
+        <Property name="rootLevel">DEBUG</Property>
+        <Property name="everyFileSize">1024MB</Property>
+        <Property name="logPattern">[%-p] [%d{yyyy.MM.dd HH:mm:ss.SSS}] [${sys:local-ip}] [%X{tracking-chain}] [%t] [%c(%L)] - %m%n</Property>
+        <Property name="logFilePath">/workspace/webapp/mywork/logs/</Property>
+        <Property name="logBackUpPath">/workspace/webapp/mywork/logs/back</Property>
+        <Property name="logFileName">eureka_${sys:local-ip}</Property>
+    </Properties>
+    <Appenders>
+        <!--很直白，Console指定了结果输出到控制台-->
+        <Console name="ConsolePrint" target="SYSTEM_OUT">
+            <PatternLayout pattern="${logPattern}"/>
+        </Console>
+        <!--<File>输出结果到指定文件</File>-->
+        <!--<RollingFile>同样输出结果到指定文件，但是使用buffer，速度会快点</RollingFile>-->
+        <!--filePattern：表示当日志到达指定的大小或者时间，产生新日志时，旧日志的命名路径。-->
+        <!--PatternLayout：和log4j一样，指定输出日志的格式，append表示是否追加内容，值默认为true-->
+        <!-- <RollingFile name="RollingFile" fileName="${logFilePath}/${logFileName}.log"
+                     filePattern="${logBackUpPath}/$${date:yyyy-MM}/${logFileName}-%d{yyyy-MM-dd}_%i.log.gz">
+            <PatternLayout pattern="${logPattern}"/> -->
+        <!--注意，如果有多个ThresholdFilter，那么Filters标签是必须的-->
+        <!--     <Policies> -->
+        <!--时间策略，每隔24小时产生新的日志文件-->
+        <!--        <TimeBasedTriggeringPolicy interval="1"/> -->
+        <!--大小策略，每到30M时产生新的日志文件-->
+        <!--         <SizeBasedTriggeringPolicy size="${everyFileSize}"/>   -->
+        <!--    </Policies>  -->
+        <!-- </RollingFile> -->
+    </Appenders>
+    <Loggers>
+        <AsyncLogger name="org.apache.http" level="info"></AsyncLogger>
+        <AsyncLogger name="org.springframework" level="info"></AsyncLogger>
+        <AsyncLogger name="com.netflix" level="warn"></AsyncLogger>
+        <AsyncLogger name="org.hibernate" level="warn"></AsyncLogger>
+        <AsyncLogger name="com.alibaba" level="info"></AsyncLogger>
+        <AsyncLogger name="org.thymeleaf" level="error"></AsyncLogger>
+        <AsyncLogger name="org.apache.coyote.http11.Http11Processor" level="fatal"></AsyncLogger>
+        <AsyncLogger name="org.springframework.web.client" level="error"></AsyncLogger>
+        <!--logger用于定义log的level以及所采用的appender，如果无需自定义，可以使用root解决，root标签是log的默认输出形式-->
+        <!-- 级别顺序（低到高）：TRACE < DEBUG < INFO < WARN < ERROR < FATAL -->
+        <AsyncRoot level="${rootLevel}" includeLocation="true">
+            <!-- 只要是级别比ERROR高的，包括ERROR就输出到控制台 -->
+            <!--appender-ref中的值必须是在前面定义的appenders-->
+            <Appender-ref ref="ConsolePrint"/>
+            <!-- <Appender-ref ref="RollingFile"/> -->
+        </AsyncRoot>
+    </Loggers>
+</Configuration>

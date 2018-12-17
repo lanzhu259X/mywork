@@ -2,11 +2,11 @@ package com.lanzhu.mywork.account.api;
 
 import com.lanzhu.mywork.account.common.vo.UserVo;
 import com.lanzhu.mywork.master.config.FeignConfig;
+import com.lanzhu.mywork.master.model.ApiRequest;
 import com.lanzhu.mywork.master.model.ApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * description:
@@ -25,5 +25,13 @@ public interface UserApi {
      */
     @GetMapping("/{id}")
     ApiResponse<UserVo> getUserById(@PathVariable("id") Long userId);
+
+    /**
+     * 修改用户的状态
+     * @param request
+     * @return
+     */
+    @PostMapping("/change/status")
+    ApiResponse<Void> changeUserStatus(@Validated @RequestBody ApiRequest<UserVo> request);
 
 }
