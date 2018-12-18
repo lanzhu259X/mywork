@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
  * @date 2018-12-17
  */
 @FeignClient(name = "account", configuration = FeignConfig.class)
-@RequestMapping("/user")
 public interface UserApi {
 
     /**
@@ -23,7 +22,7 @@ public interface UserApi {
      * @param userId
      * @return
      */
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     ApiResponse<UserVo> getUserById(@PathVariable("id") Long userId);
 
     /**
@@ -31,7 +30,7 @@ public interface UserApi {
      * @param request
      * @return
      */
-    @PostMapping("/change/status")
+    @PostMapping("/user/change/status")
     ApiResponse<Void> changeUserStatus(@Validated @RequestBody ApiRequest<UserVo> request);
 
 }

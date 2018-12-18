@@ -1,7 +1,5 @@
 package com.lanzhu.mywork.master.common.utils;
 
-import lombok.extern.log4j.Log4j2;
-
 import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -16,7 +14,6 @@ import java.util.regex.Pattern;
  * @author lanzhu259X
  * @date 2018-12-10
  */
-@Log4j2
 public class IpUtils {
 
     public static final Pattern IP_PATTERN = Pattern.compile("\\d{1,3}(\\.\\d{1,3}){3,5}$");
@@ -36,7 +33,7 @@ public class IpUtils {
                     .hasMoreElements();) {
                 NetworkInterface ifc = nics.nextElement();
                 if (ifc.isUp()) {
-                    log.info("Testing interface: " + ifc.getDisplayName());
+                    System.out.println("Testing interface: " + ifc.getDisplayName());
                     if (ifc.getIndex() < lowest || result == null) {
                         lowest = ifc.getIndex();
                     } else if (result != null) {
@@ -46,7 +43,7 @@ public class IpUtils {
                     for (Enumeration<InetAddress> addrs = ifc.getInetAddresses(); addrs.hasMoreElements();) {
                         InetAddress address = addrs.nextElement();
                         if (address instanceof Inet4Address && !address.isLoopbackAddress()) {
-                            log.info("Found non-loopback interface: " + ifc.getDisplayName());
+                            System.out.println("Found non-loopback interface: " + ifc.getDisplayName());
                             result = address;
                         }
                     }
@@ -54,7 +51,8 @@ public class IpUtils {
                 }
             }
         } catch (IOException ex) {
-            log.error("Cannot get first non-loopback address", ex);
+            System.out.println("Cannot get first non-loopback address");
+            ex.printStackTrace();
         }
         if (result != null) {
             inetAddress = result;
@@ -63,7 +61,7 @@ public class IpUtils {
         try {
             return InetAddress.getLocalHost();
         } catch (UnknownHostException e) {
-            log.warn("Unable to retrieve localhost");
+            System.out.println("Unable to retrieve localhost");
         }
         return null;
     }

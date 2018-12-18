@@ -39,13 +39,8 @@
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
         <commons-net.version>3.6</commons-net.version>
         <httpclient.version>4.5.6</httpclient.version>
-        <spring-boot-starter-jdbc-version>2.1.0.RELEASE</spring-boot-starter-jdbc-version>
-        <mybatis.version>1.3.2</mybatis.version>
-        <pagehelper.version>5.1.4</pagehelper.version>
         <lombok.version>1.18.0</lombok.version>
         <mockito-core.version>2.20.1</mockito-core.version>
-        <druid.version>1.1.10</druid.version>
-        <hikaricp.version>3.2.0</hikaricp.version>
         <guava.version>25.1-jre</guava.version>
         <sleth-zipkin.version>2.0.1.RELEASE</sleth-zipkin.version>
         <disruptor.version>3.4.2</disruptor.version>
@@ -120,18 +115,6 @@
                 <version>${sleth-zipkin.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-jdbc</artifactId>
-                <version>${spring-boot-starter-jdbc-version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis.version}</version>
-            </dependency>
-
             <!-- log -->
             <dependency>
                 <groupId>com.lmax</groupId>
@@ -139,17 +122,6 @@
                 <version>${disruptor.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.github.pagehelper</groupId>
-                <artifactId>pagehelper</artifactId>
-                <version>${pagehelper.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid</artifactId>
-                <version>${druid.version}</version>
-            </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>

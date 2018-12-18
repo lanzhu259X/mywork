@@ -57,11 +57,15 @@ ribbon:
 
 info:
   build:
-    artifact: '@project.artifact@'
-    name: '@project.name@'
-    description: '@project.description@'
-    version: '@project.version@'
-
+    artifact: "@project.artifact@"
+    name: "@project.name@"
+    description: "@project.description@"
+    version: "@project.version@"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: *
 
 
 
