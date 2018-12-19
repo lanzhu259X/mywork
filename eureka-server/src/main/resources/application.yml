@@ -1,0 +1,33 @@
+server:
+  port: 9000
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  application:
+    name: eureka-server
+eureka:
+  instance:
+    appname: ${spring.application.name}
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    # 不需要把自己注册到自己身上
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:${server.port}/eureka/
+  server:
+    response-cache-update-interval-ms: 5000
+    peer-eureka-nodes-update-interval-ms: 30000
+    # 是否启用自主保护
+    enable-self-preservation: false
+    # 启用主动失效，每次主动失效检测间隔为5s,(默认不启动默认间隔60s)
+    eviction-interval-timer-in-ms: 5000
+logging:
+  config: classpath:log4j2.xml
+
+
+
+
+
+
