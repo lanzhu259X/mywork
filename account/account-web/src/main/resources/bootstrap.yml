@@ -1,0 +1,69 @@
+server:
+  port: 9001
+  tomcat:
+    uri-encoding: UTF-8
+  servlet:
+    context-path: /
+spring:
+  application:
+    name: account
+  messages:
+    basename: i18n/message
+    cache-duration: 3600
+    encoding: UTF-8
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
+
+eureka:
+  instance:
+    appname: ${spring.application.name}
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 15
+    metadata-map:
+      envflag: normal
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://192.168.99.100:9000/eureka/
+    registry-fetch-interval-seconds: 5
+feign:
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+  httpclient:
+    enabled: true
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 139000
+      timeout:
+        enable: true
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 3000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+  filter:
+    metadata:
+      enabled: true
+logging:
+  config: classpath:log4j2.xml
+
+
+

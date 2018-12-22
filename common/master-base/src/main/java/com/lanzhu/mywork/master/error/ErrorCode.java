@@ -16,7 +16,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author lanzhu259X
  * @date 2018-09-20
  */
-public enum ErrorCode {
+public enum ErrorCode implements BaseErrorCode {
 
     // SYS COMMON 000 SY
     SUCCESS("000000", "正常"),
@@ -45,10 +45,12 @@ public enum ErrorCode {
         return null;
     }
 
+    @Override
     public String getCode() {
         return code;
     }
 
+    @Override
     public String getMessage() {
         return message;
     }

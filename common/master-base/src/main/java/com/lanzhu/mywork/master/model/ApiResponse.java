@@ -1,6 +1,7 @@
 package com.lanzhu.mywork.master.model;
 
 import com.lanzhu.mywork.master.commons.ToString;
+import com.lanzhu.mywork.master.error.BaseErrorCode;
 import com.lanzhu.mywork.master.error.ErrorCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -93,7 +94,7 @@ public class ApiResponse<T> extends ToString {
      * @param <T>
      * @return
      */
-    public static <T> ApiResponse<T> getFail(ErrorCode errorCode) {
+    public static <T> ApiResponse<T> getFail(BaseErrorCode errorCode) {
         return new ApiResponse<>(errorCode.getCode(), errorCode.getMessage(), null);
     }
 
@@ -115,7 +116,7 @@ public class ApiResponse<T> extends ToString {
      * @param <T>
      * @return
      */
-    public static <T> ApiResponse<T> getFail(ErrorCode errorCode, T data) {
+    public static <T> ApiResponse<T> getFail(BaseErrorCode errorCode, T data) {
         return new ApiResponse<>(errorCode.getCode(), errorCode.getMessage(), data);
     }
 
@@ -126,7 +127,7 @@ public class ApiResponse<T> extends ToString {
      * @param <T>
      * @return
      */
-    public static <T> ApiResponse<T> getFail(ErrorCode errorCode, String message, T data) {
+    public static <T> ApiResponse<T> getFail(BaseErrorCode errorCode, String message, T data) {
         return new ApiResponse<>(errorCode.getCode(), message, data);
     }
 
