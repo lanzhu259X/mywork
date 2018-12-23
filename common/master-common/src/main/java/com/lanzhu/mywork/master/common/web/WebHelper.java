@@ -3,6 +3,7 @@ package com.lanzhu.mywork.master.common.web;
 import com.lanzhu.mywork.master.constant.Constant;
 import com.lanzhu.mywork.master.constant.Language;
 import com.lanzhu.mywork.master.constant.Terminal;
+import com.lanzhu.mywork.master.model.ApiRequestHeader;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -283,6 +284,10 @@ public class WebHelper {
             throw new IllegalArgumentException("获取不到客户端IP请检查网络配置");
         }
         return ipAddress;
+    }
+
+    public static ApiRequestHeader getApiRequestHeader() {
+        return (ApiRequestHeader) getHttpServletRequest().getAttribute(Constant.API_REQUEST_HEADER);
     }
 
 }

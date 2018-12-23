@@ -12,6 +12,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.i18n.LocaleContext;
@@ -42,10 +43,8 @@ import java.util.UUID;
  */
 @Log4j2
 @Configuration
+@ConditionalOnProperty(value = "common.configs.locale.enabled", matchIfMissing = true)
 public class LocaleConfig {
-
-    @Value("${spring.profiles.active}")
-    private String profiles;
 
     private final static String NONE_POST_JSON = "nonePostJson";
 
@@ -87,7 +86,7 @@ public class LocaleConfig {
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain filterChain) throws ServletException, IOException {
 
-                TrackingUtils.putTracking(NONE_POST_JSON, String.valueOf(UUID.randomUUID()));
+                TrackingUtils.putTracking(NONE_POST_JSON, UUID.randomUUID().toString().replaceAll("-", ""));
 
                 // 设置成可以重复读取的流
                 if (!(request instanceof CustomServletRequestWrapper)) {
@@ -141,7 +140,7 @@ public class LocaleConfig {
         return filter;
     }
 
-    public void setLocale(HttpServletRequest request, HttpServletResponse response, Locale locale) {
+    protected void setLocale(HttpServletRequest request, HttpServletResponse response, Locale locale) {
         final LocaleContext localeContext = (locale != null ? new SimpleLocaleContext(locale) : null);
         Locale localeNew = null;
         TimeZone timeZone = null;

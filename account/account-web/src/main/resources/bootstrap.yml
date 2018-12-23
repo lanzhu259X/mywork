@@ -8,7 +8,7 @@ spring:
   application:
     name: account
   messages:
-    basename: i18n/message
+    basename: i18n/messages
     cache-duration: 3600
     encoding: UTF-8
   http:

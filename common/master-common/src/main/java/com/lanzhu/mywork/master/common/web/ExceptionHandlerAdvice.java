@@ -10,8 +10,9 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.HandlerMethod;
 
 import javax.annotation.Resource;
@@ -27,12 +28,13 @@ import java.util.Map;
  * @date 2018-12-08
  */
 @Log4j2
-@RestControllerAdvice
+@ControllerAdvice
 public class ExceptionHandlerAdvice {
 
     @Resource
     private MessageHelper messageHelper;
 
+    @ResponseBody
     @ExceptionHandler(value = BindException.class)
     public ApiResponse<?> exception(HttpServletResponse response, BindException exception, HandlerMethod handler)
             throws IOException {
@@ -41,6 +43,7 @@ public class ExceptionHandlerAdvice {
         return this.getValid(exception);
     }
 
+    @ResponseBody
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ApiResponse<?> exception(HttpServletResponse response, MethodArgumentNotValidException exception,
                                     HandlerMethod handler) throws IOException {
@@ -49,6 +52,7 @@ public class ExceptionHandlerAdvice {
         return this.getValid(exception.getBindingResult());
     }
 
+    @ResponseBody
     @ExceptionHandler(value = BizException.class)
     public ApiResponse<?> exception(BizException bizException, HandlerMethod handlerMethod, HttpServletRequest request, HttpServletResponse response) throws IOException {
         log.warn("BizException: {}", this.parseExceptionAsString(bizException));
@@ -57,6 +61,7 @@ public class ExceptionHandlerAdvice {
         return ApiResponse.getFail(bizException.getErrorCode(), message, bizException.getData());
     }
 
+    @ResponseBody
     @ExceptionHandler({Error.class, Exception.class, Throwable.class, RuntimeException.class})
     public ApiResponse<?> exception(HttpServletResponse response, Throwable exception, HttpServletRequest request) throws IOException {
         log.error("System error:", exception);
