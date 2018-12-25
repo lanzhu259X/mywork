@@ -15,7 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @author lanzhu259X
  * @date 2018-12-22
  */
-@ComponentScan(basePackages = {"com.lanzhu.mywork.account", "com.lanzhu.mywork.master.common"})
+@ComponentScan(basePackages = {"com.lanzhu.mywork.account"})
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients

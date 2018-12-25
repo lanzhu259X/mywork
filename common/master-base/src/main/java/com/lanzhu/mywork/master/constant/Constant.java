@@ -13,6 +13,8 @@ public final class Constant {
     /** 终端类型 KEY */
     public static final String CLIENT_TYPE = "clientType";
 
+    /** 灰度环境头 */
+    public static final String GRAY_ENV_HEADER = "X-GRAY-ENV";
     /** 系统环境标签 */
     public static final String ENV_TAG = "envTag";
     /** 环境灰度发布的标签KEY */
