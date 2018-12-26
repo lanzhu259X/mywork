@@ -1,23 +1,28 @@
 package com.lanzhu.mywork.master.config;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.lanzhu.mywork.master.constant.Constant;
 import com.lanzhu.mywork.master.ribbon.RibbonFilterContextHolder;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
+import feign.codec.Decoder;
+import feign.codec.Encoder;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
+import org.springframework.cloud.openfeign.support.ResponseEntityDecoder;
+import org.springframework.cloud.openfeign.support.SpringDecoder;
+import org.springframework.cloud.openfeign.support.SpringEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -39,16 +44,38 @@ public class FeignConfig implements RequestInterceptor{
     @Autowired
     private Environment env;
 
+//    @Bean
+//    public ObjectMapper feignEncoder(ObjectFactory<HttpMessageConverters> messageConverters) {
+//        ObjectMapper objectMapper = Jackson2ObjectMapperBuilder.json().build();
+//        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+//        HttpMessageConverters converters = messageConverters.getObject();
+//        for (HttpMessageConverter<?> converter : converters) {
+//            if (converter instanceof MappingJackson2HttpMessageConverter) {
+//                MappingJackson2HttpMessageConverter mjmc = (MappingJackson2HttpMessageConverter) converter;
+//                mjmc.setObjectMapper(objectMapper);
+//            }
+//        }
+//        return objectMapper;
+//    }
+
     @Bean
-    public ObjectMapper feignEncoder(ObjectFactory<HttpMessageConverters> messageConverters) {
-        ObjectMapper objectMapper = Jackson2ObjectMapperBuilder.json().build();
+    public Decoder feignDecoder() {
+        HttpMessageConverter jacksonConverter = new MappingJackson2HttpMessageConverter(customObjectMapper());
+        ObjectFactory<HttpMessageConverters> objectFactory = () -> new HttpMessageConverters(jacksonConverter);
+        return new ResponseEntityDecoder(new SpringDecoder(objectFactory));
+    }
+
+    @Bean
+    public Encoder feignEncoder(){
+        HttpMessageConverter jacksonConverter = new MappingJackson2HttpMessageConverter(customObjectMapper());
+        ObjectFactory<HttpMessageConverters> objectFactory = () -> new HttpMessageConverters(jacksonConverter);
+        return new SpringEncoder(objectFactory);
+    }
+
+    private ObjectMapper customObjectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
-        for (HttpMessageConverter<?> converter : messageConverters.getObject().getConverters()) {
-            if (converter instanceof MappingJackson2HttpMessageConverter) {
-                MappingJackson2HttpMessageConverter mjmc = (MappingJackson2HttpMessageConverter) converter;
-                mjmc.setObjectMapper(objectMapper);
-            }
-        }
+        objectMapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
         return objectMapper;
     }
 

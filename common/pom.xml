@@ -33,6 +33,7 @@
         <spring-cloud.version>Finchley.SR2</spring-cloud.version>
         <spring-boot-starter-web-version>2.1.1.RELEASE</spring-boot-starter-web-version>
         <fastjson.version>1.2.49</fastjson.version>
+        <jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
         <commons-lang3.version>3.8</commons-lang3.version>
         <commons-io.version>2.6</commons-io.version>
         <commons-collections4.version>4.2</commons-collections4.version>
@@ -127,6 +128,13 @@
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${jackson-mapper-asl.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>

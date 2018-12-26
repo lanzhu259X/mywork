@@ -33,7 +33,7 @@ eureka:
     healthcheck:
       enabled: true
     service-url:
-      defaultZone: http://192.168.99.100:9000/eureka/
+      defaultZone: http://localhost:9000/eureka/
     registry-fetch-interval-seconds: 5
 feign:
   compression:
