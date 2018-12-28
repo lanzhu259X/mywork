@@ -44,20 +44,6 @@ public class FeignConfig implements RequestInterceptor{
     @Autowired
     private Environment env;
 
-//    @Bean
-//    public ObjectMapper feignEncoder(ObjectFactory<HttpMessageConverters> messageConverters) {
-//        ObjectMapper objectMapper = Jackson2ObjectMapperBuilder.json().build();
-//        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
-//        HttpMessageConverters converters = messageConverters.getObject();
-//        for (HttpMessageConverter<?> converter : converters) {
-//            if (converter instanceof MappingJackson2HttpMessageConverter) {
-//                MappingJackson2HttpMessageConverter mjmc = (MappingJackson2HttpMessageConverter) converter;
-//                mjmc.setObjectMapper(objectMapper);
-//            }
-//        }
-//        return objectMapper;
-//    }
-
     @Bean
     public Decoder feignDecoder() {
         HttpMessageConverter jacksonConverter = new MappingJackson2HttpMessageConverter(customObjectMapper());

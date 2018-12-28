@@ -23,6 +23,7 @@ eureka:
     enable-self-preservation: false
     # 启用主动失效，每次主动失效检测间隔为5s,(默认不启动默认间隔60s)
     eviction-interval-timer-in-ms: 5000
+    peer-node-read-timeout-ms: 1000
 logging:
   config: classpath:log4j2.xml
 
