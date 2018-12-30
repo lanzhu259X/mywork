@@ -3,7 +3,7 @@ package com.lanzhu.mywork.master.common.config;
 import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
 import com.alibaba.fastjson.util.IOUtils;
 import com.lanzhu.mywork.master.common.utils.RedisCacheUtils;
-import com.lanzhu.mywork.master.constant.CacheKeyCons;
+import com.lanzhu.mywork.master.common.constant.CacheKeyCons;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

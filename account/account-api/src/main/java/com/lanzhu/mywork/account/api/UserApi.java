@@ -21,29 +21,4 @@ import org.springframework.web.bind.annotation.*;
 public interface UserApi {
 
 
-    /**
-     * 根据user_id 获取用户信息
-     * @param userId
-     * @return
-     */
-    @GetMapping("/user/{userId}")
-    ApiResponse<UserVo> getUserById(@PathVariable("userId") Long userId);
-
-
-    /**
-     * 修改用户的显示名
-     * @param request
-     * @return
-     */
-    @PutMapping("/user/update/displayName")
-    ApiResponse<Void> updateDisplayName(@Validated @RequestBody ApiRequest<UserUpdateArg> request);
-
-    /**
-     * 查询用户列表
-     * @param request
-     * @return
-     */
-    @PostMapping("/user/query")
-    ApiResponse<SearchResult<UserVo>> queryUserList(@Validated @RequestBody ApiRequest<UserQuery> request);
-
 }

@@ -1,7 +1,7 @@
 package com.lanzhu.mywork.master.constant;
 
 /**
- * description:
+ * description: 前端消息类型
  *
  * @author lanzhu259X
  * @date 2018-09-20

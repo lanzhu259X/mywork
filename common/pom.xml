@@ -45,6 +45,9 @@
         <guava.version>25.1-jre</guava.version>
         <sleth-zipkin.version>2.0.1.RELEASE</sleth-zipkin.version>
         <disruptor.version>3.4.2</disruptor.version>
+        <mybatis.version>1.3.2</mybatis.version>
+        <druid.version>1.1.10</druid.version>
+        <pagehelper.version>5.1.4</pagehelper.version>
     </properties>
 
     <dependencies>
@@ -187,6 +190,22 @@
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${pagehelper.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -208,6 +227,19 @@
                 </configuration>
             </plugin>
         </plugins>
+
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/java</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
     </build>
 
 </project>

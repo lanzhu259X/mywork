@@ -26,4 +26,27 @@ public final class Constant {
     public static final String API_SYS_HEADER = "sys_header";
 
 
+    /** 用户状态值：使用的是long类型的64位二进制占位符，0-false 1-true
+     *  1：用户是否激活
+     *  2：用户是否禁用
+     *  3：用户是否锁定
+     *  4：手机是否绑定
+     *  5：邮箱是否绑定
+     *  6：微信是否绑定
+     *  7: 谷歌身份认证绑定
+     *
+     *  20：用户是否已删除
+     */
+    public static final long USER_ACTIVE = 1L; // 激活
+    public static final long USER_DISABLED = 2L << 0; // 禁用
+    public static final long USER_LOCK = 2L << 1; // 锁定
+    public static final long USER_MOBILE = 2L << 2; // 已绑定手机
+    public static final long USER_EMAIL = 2L << 3; // 邮箱绑定
+    public static final long USER_WEIXIN = 2L << 4; // 微信绑定
+    public static final long USER_GOOGLE = 2L << 5; // 谷歌身份认证绑定
+    public static final long USER_DELETE = 2L << 18; // 用户已删除
+
+
+
+
 }

@@ -1,4 +1,4 @@
-package com.lanzhu.mywork.master.constant;
+package com.lanzhu.mywork.master.common.constant;
 
 /**
  * description:
