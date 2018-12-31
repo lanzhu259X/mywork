@@ -1,5 +1,6 @@
 package com.lanzhu.mywork.account.data.entity;
 
+import com.lanzhu.mywork.account.common.enums.UserAuthType;
 import com.lanzhu.mywork.master.commons.ToString;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +21,7 @@ public class UserAuthenticate extends ToString {
 
     private Long userId;
 
-    private String authType;
+    private UserAuthType authType;
 
     private String identifier;
 

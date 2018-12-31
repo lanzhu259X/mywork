@@ -54,4 +54,10 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
+  <select id="getUserAuthByIdentifier" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from t_user_authenticate
+    where auth_type = #{authType,jdbcType=VARCHAR} and identifier = #{identifier,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

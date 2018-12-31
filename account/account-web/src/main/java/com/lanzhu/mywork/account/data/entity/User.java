@@ -38,6 +38,10 @@ public class User extends ToString {
 
     private String avatarUrl;
 
+    private String inviteCode;
+
+    private Long inviteUserId;
+
     private UserStatusEx getUserStatusEx() {
         return new UserStatusEx(this.status);
     }

@@ -33,6 +33,10 @@ public class UserVo extends ToString {
 
     private String avatarUrl;
 
+    private String inviteCode;
+
+    private String inviteUserId;
+
     private UserStatusEx getUserStatusEx() {
         return new UserStatusEx(this.status);
     }
