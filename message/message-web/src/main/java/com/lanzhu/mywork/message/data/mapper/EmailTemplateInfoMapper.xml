@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanzhu.mywork.message.data.mapper.EmailTemplateInfoMapper">
+  <resultMap id="BaseResultMap" type="com.lanzhu.mywork.message.data.entity.EmailTemplateInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="template" jdbcType="VARCHAR" property="template" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="template_desc" jdbcType="VARCHAR" property="templateDesc" />
+    <result column="email_subject" jdbcType="VARCHAR" property="emailSubject" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="email_content" jdbcType="LONGVARCHAR" property="emailContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, template, status, template_desc, email_subject, email_content, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    from t_email_template
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" parameterType="com.lanzhu.mywork.message.data.entity.EmailTemplateInfo" keyProperty="id" useGeneratedKeys="true">
+    insert into t_email_template (template, status,
+      template_desc, email_subject, create_time, 
+      update_time, email_content)
+    values (#{template,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+      #{templateDesc,jdbcType=VARCHAR}, #{emailSubject,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{emailContent,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.lanzhu.mywork.message.data.entity.EmailTemplateInfo">
+    update t_email_template
+    <set>
+      <if test="template != null">
+        template = #{template,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="templateDesc != null">
+        template_desc = #{templateDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="emailSubject != null">
+        email_subject = #{emailSubject,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="emailContent != null">
+        email_content = #{emailContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getByTemplate" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    form t_email_template
+    where template = #{template,jdbcType=VARCHAR}
+  </select>
+
+</mapper>

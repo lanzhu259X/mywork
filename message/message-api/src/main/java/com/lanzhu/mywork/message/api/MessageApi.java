@@ -4,6 +4,7 @@ import com.lanzhu.mywork.master.config.FeignConfig;
 import com.lanzhu.mywork.master.model.ApiRequest;
 import com.lanzhu.mywork.master.model.ApiResponse;
 import com.lanzhu.mywork.message.common.MessageConstant;
+import com.lanzhu.mywork.message.vo.request.BatchMessageArg;
 import com.lanzhu.mywork.message.vo.request.EmailMessageArg;
 import com.lanzhu.mywork.message.vo.request.MobileMessageArg;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -29,10 +30,26 @@ public interface MessageApi {
     ApiResponse<Void> sendEmailMessage(@Validated @RequestBody ApiRequest<EmailMessageArg> request);
 
     /**
+     * 批量发送邮件
+     * @param request
+     * @return
+     */
+    @PostMapping("/message/send/email/batch")
+    ApiResponse<Void> sendEmailBatch(@Validated @RequestBody ApiRequest<BatchMessageArg> request);
+
+    /**
      * 发生短信信息
      * @param request
      * @return
      */
     @PostMapping("/message/send/mobile")
     ApiResponse<Void> sendMobileMessage(@Validated @RequestBody ApiRequest<MobileMessageArg> request);
+
+    /**
+     * 批量发送短信
+     * @param request
+     * @return
+     */
+    @PostMapping("message/send/mobile/batch")
+    ApiResponse<Void> sendMobileBatch(@Validated @RequestBody ApiRequest<BatchMessageArg> request);
 }

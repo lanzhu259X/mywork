@@ -37,7 +37,7 @@
         </javaClientGenerator>
 
         <!-- 表名和生成的实体名 -->
-        <table tableName="t_user_authenticate" domainObjectName="UserAuthenticate" enableCountByExample="false"
+        <table tableName="t_message_log" domainObjectName="MessageLog" enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"/>

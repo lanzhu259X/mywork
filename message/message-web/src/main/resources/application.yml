@@ -7,3 +7,13 @@ druid:
       driver-class-name: com.mysql.jdbc.Driver
 logging:
   config: classpath:log4j2.xml
+
+email:
+  smtp:
+    host: smtp.126.com
+  send:
+    from: liliang988@126.com
+  auth:
+    code: xxxxxx
+
+

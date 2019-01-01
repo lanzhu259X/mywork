@@ -12,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 public enum MessageErrorCode implements BaseErrorCode {
 
     TEMPLATE_NOT_FOUND("002001", "消息模本不存在"),
+    EMAIL_SEND_FAIL("002002", "邮件发送失败"),
+    TEMPLATE_NOT_NORMAL("002003", "消息模本不可用"),
     ;
 
     private String code;
