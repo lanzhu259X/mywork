@@ -3,7 +3,6 @@ package com.lanzhu.mywork.master.common.web;
 import com.lanzhu.mywork.master.constant.Constant;
 import com.lanzhu.mywork.master.constant.Language;
 import com.lanzhu.mywork.master.constant.Terminal;
-import com.lanzhu.mywork.master.model.ApiRequestHeader;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.regex.Pattern;
 
 /**
  * description: 获取一些请求信息中的内容
@@ -25,7 +23,6 @@ import java.util.regex.Pattern;
  */
 public class WebHelper {
 
-    public static final Pattern IP_PATTERN = Pattern.compile("\\d{1,3}(\\.\\d{1,3}){3,5}$");
     public static final String X_ORIGIN_FORWARD_FOR = "X-Origin-Forwarded-For";
     public static final String X_FORWARD_FOR = "X-Forwarded-For";
     public static final String PROXY_CLIENT_IP = "Proxy-Client-IP";
@@ -34,7 +31,6 @@ public class WebHelper {
     public static final String HTTP_X_FORWARDED_FOR = "HTTP_X_FORWARDED_FOR";
     public static final String UNKNOWN = "unknown";
 
-    private static final String ANYHOST = "0.0.0.0";
     private static final String LOCALHOST = "127.0.0.1";
 
     private static ApplicationContext applicationContext;
@@ -207,20 +203,9 @@ public class WebHelper {
         if (request == null) {
             return null;
         }
-        String contextPath = request.getContextPath();
-        String scheme = request.getScheme();
-        String serverName = request.getServerName();
-        int port = request.getServerPort();
-        if (StringUtils.isBlank(contextPath) || StringUtils.equalsIgnoreCase(contextPath, "/")) {
-            contextPath = "/";
-        }
-        StringBuilder builder = new StringBuilder();
-        builder.append(scheme);
-        builder.append("://");
-        builder.append(serverName);
-        builder.append(port);
-        builder.append(contextPath);
-        return builder.toString();
+        StringBuffer url = request.getRequestURL();
+        return url.delete(url.length() - request.getRequestURI().length(), url.length())
+                .append(request.getServletContext().getContextPath()).toString();
     }
 
     /**
@@ -269,25 +254,18 @@ public class WebHelper {
                     inet = InetAddress.getLocalHost();
                     ipAddress = inet.getHostAddress();
                 } catch (UnknownHostException e) {
-                    e.printStackTrace();
+                    // do nothing
                 }
-
             }
         }
         // 对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割,  "***.***.***.***".length()
-        if (ipAddress != null && ipAddress.length() > 15) {
-            if (ipAddress.contains(",")) {
-                ipAddress = ipAddress.substring(0, ipAddress.indexOf(","));
-            }
+        if (ipAddress != null && ipAddress.length() > 15 && ipAddress.contains(",")) {
+            ipAddress = ipAddress.substring(0, ipAddress.indexOf(','));
         }
         if (ipAddress == null || ipAddress.length() == 0 || UNKNOWN.equalsIgnoreCase(ipAddress)) {
             throw new IllegalArgumentException("获取不到客户端IP请检查网络配置");
         }
         return ipAddress;
-    }
-
-    public static ApiRequestHeader getApiRequestHeader() {
-        return (ApiRequestHeader) getHttpServletRequest().getAttribute(Constant.API_REQUEST_HEADER);
     }
 
 }

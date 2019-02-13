@@ -102,9 +102,9 @@ public class FeignConfig implements RequestInterceptor{
 
     private void setEnvFlag() {
         // 如果配置了参数eureka.instance.metadataMap.targetEnvflag
-        String targetEnvflag = env.getProperty("eureka.instance.metadataMap.targetEnvflag");
-        if (StringUtils.isNoneBlank(targetEnvflag)) {
-            RibbonFilterContextHolder.getCurrentContext().setEnvFlag(targetEnvflag);
+        String targetEnvFlag = env.getProperty("eureka.instance.metadataMap.targetEnvflag");
+        if (StringUtils.isNoneBlank(targetEnvFlag)) {
+            RibbonFilterContextHolder.getCurrentContext().setEnvFlag(targetEnvFlag);
         }
     }
 }

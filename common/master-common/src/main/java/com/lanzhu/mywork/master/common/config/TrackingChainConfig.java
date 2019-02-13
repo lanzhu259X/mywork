@@ -3,7 +3,6 @@ package com.lanzhu.mywork.master.common.config;
 import com.lanzhu.mywork.master.common.utils.TrackingUtils;
 import com.lanzhu.mywork.master.common.web.WebHelper;
 import com.lanzhu.mywork.master.constant.Constant;
-import com.lanzhu.mywork.master.model.ApiRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -13,8 +12,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
@@ -31,28 +28,26 @@ import java.util.UUID;
 @ConditionalOnClass(JoinPoint.class)
 public class TrackingChainConfig {
 
-    private static final String REQUEST = "request";
+    private static final String REQUEST = "REQ";
 
     @Pointcut("@within(org.springframework.web.bind.annotation.RestController)")
     public void executionService() {
+        // do nothing because pointcut define
     }
 
     @Before(value = "executionService()")
     public void doBefore(JoinPoint joinPoint) {
-        String envTag;
-        try{
-            HttpServletRequest request =
-                    ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        String envTag = StringUtils.EMPTY;
+        HttpServletRequest request = WebHelper.getHttpServletRequest();
+        if (request == null) {
+            return;
+        }
+        try {
             envTag = request.getHeader(Constant.ENV_TAG_GRAY);
             if (StringUtils.isBlank(envTag)) {
                 envTag = WebHelper.getCookieValue(request, Constant.ENV_TAG_GRAY);
             }
-        }catch (Exception e) {
-            envTag = StringUtils.EMPTY;
-        }
-
-        try {
-            final String trackingChain = ((ApiRequest) joinPoint.getArgs()[0]).getTrackingChain();
+            String trackingChain = request.getHeader(Constant.HEAD_TRACKING_CHAIN);
             if (StringUtils.isNotBlank(trackingChain)) {
                 TrackingUtils.putTracking(trackingChain);
             }else {

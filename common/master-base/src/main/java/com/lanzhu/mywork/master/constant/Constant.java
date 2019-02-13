@@ -22,8 +22,15 @@ public final class Constant {
     /** 通用的环境标签值 */
     public static final String ENV_TAG_NORMAL = "normal";
 
+    /** 用户ID */
+    public static final String HEAD_USER_ID = "X-USER-ID";
+    /** 请求跟踪链 */
+    public static final String HEAD_TRACKING_CHAIN = "X-TRACKING-CHAIN";
+
+
     public static final String API_REQUEST_HEADER = "api_request_header";
     public static final String API_SYS_HEADER = "sys_header";
+
 
 
     /** 用户状态值：使用的是long类型的64位二进制占位符，0-false 1-true
