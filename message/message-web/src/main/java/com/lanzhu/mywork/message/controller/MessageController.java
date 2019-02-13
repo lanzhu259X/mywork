@@ -1,6 +1,5 @@
 package com.lanzhu.mywork.message.controller;
 
-import com.lanzhu.mywork.master.model.ApiRequest;
 import com.lanzhu.mywork.master.model.ApiResponse;
 import com.lanzhu.mywork.message.api.MessageApi;
 import com.lanzhu.mywork.message.service.IMessageService;
@@ -26,26 +25,26 @@ public class MessageController implements MessageApi {
     private IMessageService iMessageService;
 
     @Override
-    public ApiResponse<Void> sendEmailMessage(@Validated @RequestBody ApiRequest<EmailMessageArg> request) {
-        iMessageService.sendEmailMessage(request.getData());
+    public ApiResponse<Void> sendEmailMessage(@Validated @RequestBody EmailMessageArg request) {
+        iMessageService.sendEmailMessage(request);
         return ApiResponse.getOk();
     }
 
     @Override
-    public ApiResponse<Void> sendEmailBatch(@Validated @RequestBody ApiRequest<BatchMessageArg> request) {
-        iMessageService.sendEmailBatch(request.getData());
+    public ApiResponse<Void> sendEmailBatch(@Validated @RequestBody BatchMessageArg request) {
+        iMessageService.sendEmailBatch(request);
         return ApiResponse.getOk();
     }
 
     @Override
-    public ApiResponse<Void> sendMobileMessage(@Validated @RequestBody ApiRequest<MobileMessageArg> request) {
-        iMessageService.sendMobileMessage(request.getData());
+    public ApiResponse<Void> sendMobileMessage(@Validated @RequestBody MobileMessageArg request) {
+        iMessageService.sendMobileMessage(request);
         return ApiResponse.getOk();
     }
 
     @Override
-    public ApiResponse<Void> sendMobileBatch(@Validated @RequestBody ApiRequest<BatchMessageArg> request) {
-        iMessageService.sendMobileBatch(request.getData());
+    public ApiResponse<Void> sendMobileBatch(@Validated @RequestBody BatchMessageArg request) {
+        iMessageService.sendMobileBatch(request);
         return ApiResponse.getOk();
     }
 }

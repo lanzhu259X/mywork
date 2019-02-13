@@ -1,6 +1,5 @@
 package com.lanzhu.mywork.message.service;
 
-import com.lanzhu.mywork.master.model.ApiRequest;
 import com.lanzhu.mywork.message.vo.request.BatchMessageArg;
 import com.lanzhu.mywork.message.vo.request.EmailMessageArg;
 import com.lanzhu.mywork.message.vo.request.MobileMessageArg;

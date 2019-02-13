@@ -3,7 +3,6 @@ package com.lanzhu.mywork.account.api;
 import com.lanzhu.mywork.account.common.AccountConstant;
 import com.lanzhu.mywork.account.vo.user.request.RegisterArg;
 import com.lanzhu.mywork.master.config.FeignConfig;
-import com.lanzhu.mywork.master.model.ApiRequest;
 import com.lanzhu.mywork.master.model.ApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.validation.annotation.Validated;
@@ -27,7 +26,7 @@ public interface UserAuthApi {
      * @return
      */
     @PostMapping("/user/auth/register")
-    ApiResponse<Boolean> register(@Validated @RequestBody ApiRequest<RegisterArg> request);
+    ApiResponse<Boolean> register(@Validated @RequestBody RegisterArg request);
 
 
 }
