@@ -25,6 +25,8 @@ public class UserAuthenticate extends ToString {
 
     private String identifier;
 
+    private String password;
+
     private Boolean enabled;
 
     private Date createTime;

@@ -7,13 +7,12 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="display_name" property="displayName" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="avatar_url" property="avatarUrl" jdbcType="VARCHAR" />
     <result column="invite_code" property="inviteCode" jdbcType="VARCHAR" />
     <result column="invite_user_id" property="inviteUserId" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    user_id, status, create_time, update_time, display_name, password, avatar_url,
+    user_id, status, create_time, update_time, display_name, avatar_url,
     invite_code, invite_user_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -25,12 +24,12 @@
 
   <insert id="insert" parameterType="com.lanzhu.mywork.account.data.entity.User" keyProperty="userId" useGeneratedKeys="true">
     insert into t_user (status, create_time,
-      update_time, display_name, password, avatar_url,
+      update_time, display_name, avatar_url,
       invite_code, invite_user_id
       )
     values (#{status,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},
       #{updateTime,jdbcType=TIMESTAMP}, #{displayName,jdbcType=VARCHAR},
-      #{password,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR},
+      #{avatarUrl,jdbcType=VARCHAR},
       #{inviteCode,jdbcType=VARCHAR}, #{inviteUserId,jdbcType=BIGINT}
       )
   </insert>
@@ -50,9 +49,6 @@
       <if test="displayName != null" >
         display_name = #{displayName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
       <if test="avatarUrl != null" >
         avatar_url = #{avatarUrl,jdbcType=VARCHAR},
       </if>
@@ -71,7 +67,6 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       display_name = #{displayName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
       avatar_url = #{avatarUrl,jdbcType=VARCHAR},
       invite_code = #{inviteCode,jdbcType=VARCHAR},
       invite_user_id = #{inviteUserId,jdbcType=VARCHAR}

@@ -3,11 +3,9 @@ package com.lanzhu.mywork.account;
 import com.lanzhu.mywork.master.common.constant.CommonConstant;
 import com.lanzhu.mywork.master.common.utils.IpUtils;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.ComponentScan;
 
 /**
  * description:
@@ -15,11 +13,9 @@ import org.springframework.context.annotation.ComponentScan;
  * @author lanzhu259X
  * @date 2018-12-22
  */
-@ComponentScan(basePackages = {"com.lanzhu.mywork.account"})
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-@EnableAutoConfiguration
 public class AccountApplication {
 
     public static void main(String[] args) {

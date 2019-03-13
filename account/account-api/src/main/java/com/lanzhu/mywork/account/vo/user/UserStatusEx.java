@@ -1,7 +1,9 @@
 package com.lanzhu.mywork.account.vo.user;
 
+import com.lanzhu.mywork.master.commons.ToString;
 import com.lanzhu.mywork.master.constant.Constant;
 import com.lanzhu.mywork.master.utils.BitUtils;
+import lombok.Getter;
 
 /**
  * description:
@@ -9,7 +11,10 @@ import com.lanzhu.mywork.master.utils.BitUtils;
  * @author lanzhu259X
  * @date 2018-12-30
  */
-public class UserStatusEx {
+@Getter
+public class UserStatusEx extends ToString {
+
+    private static final long serialVersionUID = 1065311213221692946L;
 
     /**
      * 是否激活
@@ -29,7 +34,7 @@ public class UserStatusEx {
     /**
      * 是否绑定手机
      */
-    private boolean isUserBindMoble;
+    private boolean isUserBindMobile;
 
     /**
      * 是否绑定邮箱
@@ -56,7 +61,7 @@ public class UserStatusEx {
         this.isUserActive = BitUtils.isTrue(status, Constant.USER_ACTIVE);
         this.isUserDisabled = BitUtils.isTrue(status, Constant.USER_DISABLED);
         this.isUserLock = BitUtils.isTrue(status, Constant.USER_LOCK);
-        this.isUserBindMoble = BitUtils.isTrue(status, Constant.USER_MOBILE);
+        this.isUserBindMobile = BitUtils.isTrue(status, Constant.USER_MOBILE);
         this.isUserBindEmail = BitUtils.isTrue(status, Constant.USER_EMAIL);
         this.isUserBindWeiXin = BitUtils.isTrue(status, Constant.USER_WEIXIN);
         this.isUserBindGoogle = BitUtils.isTrue(status, Constant.USER_GOOGLE);

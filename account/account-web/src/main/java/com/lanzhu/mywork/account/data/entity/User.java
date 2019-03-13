@@ -34,8 +34,6 @@ public class User extends ToString {
 
     private String displayName;
 
-    private String password;
-
     private String avatarUrl;
 
     private String inviteCode;
