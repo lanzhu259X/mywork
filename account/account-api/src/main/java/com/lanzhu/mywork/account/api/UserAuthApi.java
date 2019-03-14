@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author lanzhu259X
  * @date 2018-12-31
  */
-@FeignClient(name = AccountConstant.FEIGN_CLIENT_NAME, configuration = FeignConfig.class)
+@FeignClient(name = "account-user-auth-api", configuration = FeignConfig.class)
 public interface UserAuthApi {
 
 

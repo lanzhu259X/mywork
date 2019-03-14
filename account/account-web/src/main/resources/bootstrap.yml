@@ -1,9 +1,5 @@
 server:
   port: 9001
-  tomcat:
-    uri-encoding: UTF-8
-  servlet:
-    context-path: /
 spring:
   application:
     name: account
@@ -11,21 +7,14 @@ spring:
     basename: i18n/messages
     cache-duration: 3600
     encoding: UTF-8
-  http:
-    encoding:
-      charset: UTF-8
-      force: true
   cloud:
-    loadbalancer:
-      retry:
-        enabled: true
     consul:
       discovery:
-        host: localhost
-        port: 8500
-        instance-id: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
         service-name: ${spring.application.name}
-        ip-address: true
+        instance-id: ${spring.application.name}:${server.port}:${random.value}
+        enabled: true
+      host: localhost
+      port: 8500
 feign:
   compression:
     request:
@@ -35,25 +24,9 @@ feign:
   httpclient:
     enabled: true
   hystrix:
-    enabled: true
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 139000
-      timeout:
-        enable: true
-ribbon:
-  ReadTimeout: 20000
-  ConnectTimeout: 3000
-  MaxAutoRetries: 1
-  MaxAutoRetriesNextServer: 2
-  filter:
-    metadata:
-      enabled: true
+    enabled: false
 
-
-
-
+management:
+  endpoint:
+    health:
+      show-details: always

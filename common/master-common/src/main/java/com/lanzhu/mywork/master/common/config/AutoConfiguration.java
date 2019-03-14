@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * @author lanzhu259X
  * @date 2018-12-23
  */
-@Configuration()
+@Configuration
 @ComponentScan("com.lanzhu.mywork.master")
 public class AutoConfiguration {
 

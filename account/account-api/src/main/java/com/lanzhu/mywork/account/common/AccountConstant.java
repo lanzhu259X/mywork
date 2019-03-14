@@ -8,5 +8,5 @@ package com.lanzhu.mywork.account.common;
  */
 public class AccountConstant {
 
-    public static final String FEIGN_CLIENT_NAME = "account";
+//    public static final String FEIGN_CLIENT_NAME = "account";
 }

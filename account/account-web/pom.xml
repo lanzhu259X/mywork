@@ -20,17 +20,17 @@
         <dependency>
             <groupId>com.lanzhu.mywork</groupId>
             <artifactId>master-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lanzhu.mywork</groupId>
+            <artifactId>account-api</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>com.lanzhu.mywork</groupId>
                     <artifactId>master-base</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.lanzhu.mywork</groupId>
-            <artifactId>account-api</artifactId>
         </dependency>
 
         <dependency>
