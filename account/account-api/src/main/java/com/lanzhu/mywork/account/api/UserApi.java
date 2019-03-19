@@ -1,9 +1,8 @@
 package com.lanzhu.mywork.account.api;
 
-import com.lanzhu.mywork.account.common.AccountConstant;
 import com.lanzhu.mywork.account.vo.user.UserVo;
 import com.lanzhu.mywork.master.config.FeignConfig;
-import com.lanzhu.mywork.master.model.ApiResponse;
+import com.lanzhu.mywork.master.model.ApiResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +23,7 @@ public interface UserApi {
      * @return
      */
     @GetMapping("/user/{userId}")
-    ApiResponse<UserVo> getUserById(@PathVariable("userId") Long userId);
+    ApiResult<UserVo> getUserById(@PathVariable("userId") Long userId);
 
     /**
      * 根据邮箱获取用户信息
@@ -32,7 +31,7 @@ public interface UserApi {
      * @return
      */
     @GetMapping("/user/getUserByEmail")
-    ApiResponse<UserVo> getUserByEmail(@RequestParam(name = "email") String email);
+    ApiResult<UserVo> getUserByEmail(@RequestParam(name = "email") String email);
 
     /**
      * 根据手机号获取用户信息
@@ -40,6 +39,6 @@ public interface UserApi {
      * @return
      */
     @GetMapping("/user/getByMobile")
-    ApiResponse<UserVo> getUserByMobile(@RequestParam(name = "mobile") String mobile);
+    ApiResult<UserVo> getUserByMobile(@RequestParam(name = "mobile") String mobile);
 
 }

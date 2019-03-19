@@ -8,5 +8,4 @@ package com.lanzhu.mywork.message.common;
  */
 public class MessageConstant {
 
-    public static final String MESSAGE_FEIGN = "message";
 }

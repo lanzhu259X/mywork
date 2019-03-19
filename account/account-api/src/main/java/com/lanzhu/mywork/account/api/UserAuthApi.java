@@ -1,9 +1,8 @@
 package com.lanzhu.mywork.account.api;
 
-import com.lanzhu.mywork.account.common.AccountConstant;
 import com.lanzhu.mywork.account.vo.user.request.RegisterArg;
 import com.lanzhu.mywork.master.config.FeignConfig;
-import com.lanzhu.mywork.master.model.ApiResponse;
+import com.lanzhu.mywork.master.model.ApiResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +25,7 @@ public interface UserAuthApi {
      * @return
      */
     @PostMapping("/user/auth/register")
-    ApiResponse<Boolean> register(@Validated @RequestBody RegisterArg request);
+    ApiResult<Boolean> register(@Validated @RequestBody RegisterArg request);
 
 
 }

@@ -22,17 +22,17 @@
         <dependency>
             <groupId>com.lanzhu.mywork</groupId>
             <artifactId>master-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lanzhu.mywork</groupId>
+            <artifactId>message-api</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>com.lanzhu.mywork</groupId>
                     <artifactId>master-base</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.lanzhu.mywork</groupId>
-            <artifactId>message-api</artifactId>
         </dependency>
 
         <dependency>
@@ -75,7 +75,7 @@
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
         </dependency>
 
         <dependency>

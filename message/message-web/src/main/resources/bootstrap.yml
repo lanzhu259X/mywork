@@ -1,9 +1,5 @@
 server:
   port: 9002
-  tomcat:
-    uri-encoding: UTF-8
-  servlet:
-    context-path: /
 spring:
   application:
     name: message
@@ -11,30 +7,14 @@ spring:
     basename: i18n/messages
     cache-duration: 3600
     encoding: UTF-8
-  http:
-    encoding:
-      charset: UTF-8
-      force: true
   cloud:
-    loadbalancer:
-      retry:
+    consul:
+      discovery:
+        service-name: ${spring.application.name}
+        instance-id: ${spring.application.name}:${server.port}:${random.value}
         enabled: true
-
-eureka:
-  instance:
-    appname: ${spring.application.name}
-    prefer-ip-address: true
-    instance-id: ${spring.cloud.client.ip-address}:${server.port}
-    lease-renewal-interval-in-seconds: 5
-    lease-expiration-duration-in-seconds: 15
-    metadata-map:
-      envflag: normal
-  client:
-    healthcheck:
-      enabled: true
-    service-url:
-      defaultZone: http://localhost:9000/eureka/
-    registry-fetch-interval-seconds: 5
+      host: localhost
+      port: 8500
 feign:
   compression:
     request:
@@ -44,25 +24,21 @@ feign:
   httpclient:
     enabled: true
   hystrix:
-    enabled: true
+    enabled: false
+  client:
+    config:
+      default:
+        connectTimeout: 3000
+        readTimeout: 10000
 hystrix:
   command:
     default:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 139000
-      timeout:
-        enable: true
-ribbon:
-  ReadTimeout: 20000
-  ConnectTimeout: 3000
-  MaxAutoRetries: 1
-  MaxAutoRetriesNextServer: 2
-  filter:
-    metadata:
-      enabled: true
+            timeoutInMilliseconds: 15000
 
-
-
-
+management:
+  endpoint:
+    health:
+      show-details: always

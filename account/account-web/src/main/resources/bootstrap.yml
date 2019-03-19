@@ -25,6 +25,18 @@ feign:
     enabled: true
   hystrix:
     enabled: false
+  client:
+    config:
+      default:
+        connectTimeout: 3000
+        readTimeout: 10000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 15000
 
 management:
   endpoint:

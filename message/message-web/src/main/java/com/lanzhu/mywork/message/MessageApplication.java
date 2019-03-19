@@ -15,11 +15,11 @@ import org.springframework.context.annotation.ComponentScan;
  * @author lanzhu259X
  * @date 2019-01-01
  */
-@ComponentScan(basePackages = {"com.lanzhu.mywork.message"})
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableAutoConfiguration
+@ComponentScan(basePackages = {"com.lanzhu.mywork.message"})
 public class MessageApplication {
 
     public static void main(String[] args) {

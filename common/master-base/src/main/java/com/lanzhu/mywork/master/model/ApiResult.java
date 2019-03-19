@@ -5,6 +5,7 @@ import com.lanzhu.mywork.master.error.BaseErrorCode;
 import com.lanzhu.mywork.master.error.ErrorCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * description:
@@ -20,7 +21,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class ApiResponse<T> extends ToString {
+public class ApiResult<T> extends ToString {
 
     private static final long serialVersionUID = 3859910071736214157L;
 
@@ -35,22 +36,22 @@ public class ApiResponse<T> extends ToString {
 
     private T data;
 
-    public ApiResponse() {
+    public ApiResult() {
         super();
     }
 
-    public ApiResponse(T data) {
+    public ApiResult(T data) {
         super();
         setData(data);
     }
 
-    public ApiResponse(String code, T data) {
+    public ApiResult(String code, T data) {
         super();
         setCode(code);
         setData(data);
     }
 
-    public ApiResponse(String code, String message, T data) {
+    public ApiResult(String code, String message, T data) {
         super();
         setCode(code);
         setMessage(message);
@@ -66,16 +67,16 @@ public class ApiResponse<T> extends ToString {
         return SUCCESS.equals(this.code);
     }
 
-    public static <T> ApiResponse<T> getOk() {
-        return new ApiResponse();
+    public static <T> ApiResult<T> getOk() {
+        return new ApiResult();
     }
 
-    public static <T> ApiResponse<T> getOk(T data) {
-        return new ApiResponse<>(data);
+    public static <T> ApiResult<T> getOk(T data) {
+        return new ApiResult<>(data);
     }
 
-    public static <T> ApiResponse<T> getFail() {
-        return new ApiResponse<>(ErrorCode.SYS_COMMON.getCode(), null);
+    public static <T> ApiResult<T> getFail() {
+        return new ApiResult<>(ErrorCode.SYS_COMMON.getCode(), null);
     }
 
     /**
@@ -84,8 +85,8 @@ public class ApiResponse<T> extends ToString {
      * @param <T>
      * @return
      */
-    public static <T> ApiResponse<T> getFail(T data) {
-        return new ApiResponse<>(ErrorCode.SYS_COMMON.getCode(), null, data);
+    public static <T> ApiResult<T> getFail(T data) {
+        return new ApiResult<>(ErrorCode.SYS_COMMON.getCode(), null, data);
     }
 
     /**
@@ -94,8 +95,8 @@ public class ApiResponse<T> extends ToString {
      * @param <T>
      * @return
      */
-    public static <T> ApiResponse<T> getFail(BaseErrorCode errorCode) {
-        return new ApiResponse<>(errorCode.getCode(), errorCode.getMessage(), null);
+    public static <T> ApiResult<T> getFail(BaseErrorCode errorCode) {
+        return new ApiResult<>(errorCode.getCode(), errorCode.getMessage(), null);
     }
 
     /**
@@ -105,8 +106,8 @@ public class ApiResponse<T> extends ToString {
      * @param <T>
      * @return
      */
-    public static <T> ApiResponse<T> getFail(String message, T data) {
-        return new ApiResponse<>(ErrorCode.SYS_COMMON.getCode(), message, data);
+    public static <T> ApiResult<T> getFail(String message, T data) {
+        return new ApiResult<>(ErrorCode.SYS_COMMON.getCode(), message, data);
     }
 
     /**
@@ -116,8 +117,8 @@ public class ApiResponse<T> extends ToString {
      * @param <T>
      * @return
      */
-    public static <T> ApiResponse<T> getFail(BaseErrorCode errorCode, T data) {
-        return new ApiResponse<>(errorCode.getCode(), errorCode.getMessage(), data);
+    public static <T> ApiResult<T> getFail(BaseErrorCode errorCode, T data) {
+        return new ApiResult<>(errorCode.getCode(), errorCode.getMessage(), data);
     }
 
     /**
@@ -127,8 +128,12 @@ public class ApiResponse<T> extends ToString {
      * @param <T>
      * @return
      */
-    public static <T> ApiResponse<T> getFail(BaseErrorCode errorCode, String message, T data) {
-        return new ApiResponse<>(errorCode.getCode(), message, data);
+    public static <T> ApiResult<T> getFail(BaseErrorCode errorCode, String message, T data) {
+        return new ApiResult<>(errorCode.getCode(), message, data);
+    }
+
+    public static boolean isSuccess(ApiResult response) {
+        return response != null && StringUtils.equalsIgnoreCase(response.getCode(), SUCCESS);
     }
 
 }
