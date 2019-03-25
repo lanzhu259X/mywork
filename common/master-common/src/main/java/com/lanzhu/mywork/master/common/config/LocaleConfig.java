@@ -1,13 +1,10 @@
 package com.lanzhu.mywork.master.common.config;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.lanzhu.mywork.master.common.utils.TrackingUtils;
 import com.lanzhu.mywork.master.common.web.CustomServletRequestWrapper;
 import com.lanzhu.mywork.master.constant.Constant;
 import com.lanzhu.mywork.master.constant.Language;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.entity.ContentType;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -16,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.SimpleLocaleContext;
 import org.springframework.context.i18n.TimeZoneAwareLocaleContext;
-import org.springframework.http.HttpMethod;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
