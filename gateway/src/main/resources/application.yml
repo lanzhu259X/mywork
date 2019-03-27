@@ -1,0 +1,23 @@
+logging:
+  config: classpath:log4j2.xml
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: mgs-route
+          uri: lb://mywork-mgs
+          predicates:
+            - Path=/mywork-api/**
+          filters:
+            - RequestTime=true
+            - StrioPrefix=1
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      default-filters:
+        - name: Hystrix
+          args:
+            name: fallbackcmd
+            fallback-uri: forward://hystrix-fallback

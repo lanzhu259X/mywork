@@ -1,0 +1,48 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: gateway
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10M
+      max-request-size: 10M
+  cloud:
+    consul:
+      discovery:
+        service-name: ${spring.application.name}
+        instance-id: ${spring.application.name}:${server.port}:${random.value}
+        enabled: true
+      host: localhost
+      port: 8500
+feign:
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+  httpclient:
+    enabled: true
+  hystrix:
+    enabled: false
+  client:
+    config:
+      default:
+        connectTimeout: 3000
+        readTimeout: 10000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 15000
+management:
+  endpoint:
+    health:
+      show-details: always

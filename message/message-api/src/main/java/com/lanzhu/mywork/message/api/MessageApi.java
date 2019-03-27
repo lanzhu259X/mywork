@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author lanzhu259X
  * @date 2018-12-31
  */
-@FeignClient(name = "message-api", configuration = FeignConfig.class)
+@FeignClient(name = "message", configuration = FeignConfig.class)
 public interface MessageApi {
 
     /**

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author lanzhu259X
  * @date 2018-12-22
  */
-@FeignClient(name = "account-user-api", configuration = FeignConfig.class)
+@FeignClient(name = "account", configuration = FeignConfig.class)
 public interface UserApi {
 
     /**
