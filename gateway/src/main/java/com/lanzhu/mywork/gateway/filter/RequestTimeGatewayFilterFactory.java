@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
@@ -37,8 +38,14 @@ public class RequestTimeGatewayFilterFactory extends AbstractGatewayFilterFactor
                               if (config.isLogRequestTime()) {
                                   Long startTime = exchange.getAttribute(REQUEST_TIME_BEGIN);
                                   if (startTime != null) {
-                                      StringBuilder sb = new StringBuilder(exchange.getRequest().getURI().getRawPath())
-                                              .append(": ")
+                                      ServerHttpRequest request = exchange.getRequest();
+                                      StringBuilder sb = new StringBuilder("path: ")
+                                              .append(request.getURI().getRawPath())
+                                              .append(" method: ")
+                                              .append(request.getMethodValue())
+                                              .append(" remoteAddress: ")
+                                              .append(request.getRemoteAddress().toString())
+                                              .append(" time: ")
                                               .append(System.currentTimeMillis() - startTime)
                                               .append("ms");
                                       log.info(sb.toString());

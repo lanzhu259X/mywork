@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.lanzhu.mywork</groupId>
-    <artifactId>gateway</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
 
     <parent>
         <groupId>com.lanzhu.mywork</groupId>
@@ -16,16 +10,24 @@
         <relativePath>../common</relativePath>
     </parent>
 
+    <groupId>com.lanzhu.mywork</groupId>
+    <artifactId>mywork-mgs</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>mywork-mgs</name>
+
+    <description>mywork middle ground service</description>
+
     <properties>
-        <master-base-version>1.0-SNAPSHOT</master-base-version>
-        <master-common-version>1.0-SNAPSHOT</master-common-version>
+        <java.version>1.8</java.version>
+        <account-api-version>1.0-SNAPSHOT</account-api-version>
     </properties>
 
     <dependencies>
+
         <!--<dependency>-->
             <!--<groupId>com.lanzhu.mywork</groupId>-->
-            <!--<artifactId>master-base</artifactId>-->
-            <!--<version>${master-base-version}</version>-->
+            <!--<artifactId>account-api</artifactId>-->
+            <!--<version>${account-api-version}</version>-->
         <!--</dependency>-->
 
         <dependency>
@@ -35,17 +37,6 @@
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -77,8 +68,17 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
 
     <build>
         <plugins>
@@ -88,6 +88,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

@@ -6,7 +6,7 @@
         <Property name="logPattern">[%-p] [%d{yyyy.MM.dd HH:mm:ss.SSS}] [${sys:local-ip}] [%X{tracking-chain}] [%t] [%c(%L)] - %m%n</Property>
         <Property name="logFilePath">/workspace/webapp/mywork/logs/</Property>
         <Property name="logBackUpPath">/workspace/webapp/mywork/logs/back</Property>
-        <Property name="logFileName">gateway_${sys:local-ip}</Property>
+        <Property name="logFileName">mywork-mgs_${sys:local-ip}</Property>
     </Properties>
     <Appenders>
         <!--很直白，Console指定了结果输出到控制台-->

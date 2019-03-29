@@ -11,13 +11,17 @@ spring:
             - Path=/mywork-api/**
           filters:
             - RequestTime=true
-            - StrioPrefix=1
+            - RewritePath=/mywork-api/(?<segment>.*), /$\{segment}
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallback-uri: forward:/hystrix-fallback
       discovery:
         locator:
-          enabled: true
+          enabled: false
           lower-case-service-id: true
-      default-filters:
-        - name: Hystrix
-          args:
-            name: fallbackcmd
-            fallback-uri: forward://hystrix-fallback
+#      default-filters:
+#        - name: Hystrix
+#          args:
+#            name: fallbackcmd
+#            fallback-uri: forward:/hystrix-fallback
